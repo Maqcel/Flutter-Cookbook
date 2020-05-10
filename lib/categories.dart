@@ -12,7 +12,7 @@ class Categories extends StatelessWidget {
       ),
       body: GridView(
         padding: const EdgeInsets.all(15),
-        children: Data.map(
+        children: DataCategory.map(
           (listdata) => CategoryItem(
             listdata.id,
             listdata.title,

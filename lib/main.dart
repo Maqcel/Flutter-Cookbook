@@ -1,5 +1,6 @@
 import 'package:cookbook_app/categories.dart';
 import 'package:cookbook_app/categories_meal.dart';
+import 'package:cookbook_app/meal_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       home: Categories(),
       routes: {
         CategoryMealScreen.routeName: (context) => CategoryMealScreen(),
+        MealScreen.routeName: (context) => MealScreen(),
       },
     );
   }

@@ -12,7 +12,7 @@ class _Category {
   });
 }
 
-const Data = const [
+const DataCategory = const [
   _Category(
     id: 'c1',
     title: 'Italian',
