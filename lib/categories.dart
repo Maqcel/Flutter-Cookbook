@@ -11,8 +11,10 @@ class Categories extends StatelessWidget {
         title: const Text("Cookbook"),
       ),
       body: GridView(
+        padding: const EdgeInsets.all(15),
         children: Data.map(
           (listdata) => CategoryItem(
+            listdata.id,
             listdata.title,
             listdata.color,
           ),

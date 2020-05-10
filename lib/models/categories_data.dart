@@ -20,7 +20,7 @@ const Data = const [
   ),
   _Category(
     id: 'c2',
-    title: 'Quick & Easy',
+    title: 'Polish',
     color: Colors.red,
   ),
   _Category(
@@ -30,17 +30,17 @@ const Data = const [
   ),
   _Category(
     id: 'c4',
-    title: 'German',
+    title: 'Quick & Easy',
     color: Colors.amber,
   ),
   _Category(
     id: 'c5',
-    title: 'Light & Lovely',
+    title: 'Party',
     color: Colors.blue,
   ),
   _Category(
     id: 'c6',
-    title: 'Exotic',
+    title: 'Lunch',
     color: Colors.green,
   ),
   _Category(
@@ -55,12 +55,12 @@ const Data = const [
   ),
   _Category(
     id: 'c9',
-    title: 'French',
+    title: 'Fast Food',
     color: Colors.pink,
   ),
   _Category(
     id: 'c10',
-    title: 'Summer',
+    title: 'BBQ',
     color: Colors.teal,
   ),
 ];
