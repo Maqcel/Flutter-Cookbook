@@ -17,6 +17,7 @@ class _SettingsState extends State<Settings> {
   var _isVegerian = false;
   var _isVegan = false;
   var _isLascoteFree = false;
+  var _savePressed = false;
 
   @override
   initState() {
@@ -57,6 +58,9 @@ class _SettingsState extends State<Settings> {
                   vegan: _isVegan,
                   vegetarian: _isVegerian);
               widget.settings(selectedSettings);
+              setState(() {
+                _savePressed = true;
+              });
             },
           )
         ],
@@ -78,12 +82,14 @@ class _SettingsState extends State<Settings> {
                     _isGlutenFree, (newValue) {
                   setState(() {
                     _isGlutenFree = newValue;
+                    _savePressed = false;
                   });
                 }),
                 buildSwitch('Vegan', 'Show\'s only Vegan meals', _isVegan,
                     (newValue) {
                   setState(() {
                     _isVegan = newValue;
+                    _savePressed = false;
                   });
                 }),
                 buildSwitch(
@@ -91,14 +97,26 @@ class _SettingsState extends State<Settings> {
                     (newValue) {
                   setState(() {
                     _isVegerian = newValue;
+                    _savePressed = false;
                   });
                 }),
                 buildSwitch('Lactose-free', 'Show\'s only lactose-free meals',
                     _isLascoteFree, (newValue) {
                   setState(() {
                     _isLascoteFree = newValue;
+                    _savePressed = false;
                   });
                 }),
+                if (_savePressed)
+                  Container(
+                    margin: EdgeInsets.only(top: 30),
+                    child: Center(
+                      child: Text(
+                        'Settings saved!',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

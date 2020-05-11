@@ -424,8 +424,8 @@ const DataMeal = const [
       'Pan-fry cooked pierogi: Heat 1 tablespoon of butter in a large skillet over medium heat until the butter just begins to brown. Remove the pierogi from the simmering water with a slotted spoon, drain the excess water, and add to the hot pan in a single layer. Fry until the pierogi are golden brown on both sides, about 3 minutes, transfer to a plate, and drizzle with leftover brown butter. Repeat with the remaining pierogi, adding 1 tablespoon of butter after each batch.',
     ],
     isGlutenFree: true,
-    isVegan: true,
-    isVegetarian: false,
+    isVegan: false,
+    isVegetarian: true,
     isLactoseFree: false,
   ),
   Meal(
