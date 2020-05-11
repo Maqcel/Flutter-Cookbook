@@ -1,13 +1,48 @@
-import 'package:cookbook_app/categories.dart';
 import 'package:cookbook_app/categories_meal.dart';
+import 'package:cookbook_app/favorites_screen.dart';
 import 'package:cookbook_app/meal_screen.dart';
+import 'package:cookbook_app/screen_selector.dart';
+import 'package:cookbook_app/settings.dart';
 import 'package:flutter/material.dart';
+import 'models/meal_data.dart';
+import 'models/settings_data.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  SettingsData settingsdata = SettingsData(
+      gluten: false, lactose: false, vegan: false, vegetarian: false);
+
+  List<Meal> _availableMeals = DataMeal;
+
+  void _setSettings(SettingsData _settings) {
+    setState(() {
+      settingsdata = _settings;
+      _availableMeals = DataMeal.where((meal) {
+        if (settingsdata.gluten && !meal.isGlutenFree) {
+          return false;
+        }
+        if (settingsdata.vegan && !meal.isVegan) {
+          return false;
+        }
+        if (settingsdata.vegetarian && !meal.isVegetarian) {
+          return false;
+        }
+        if (settingsdata.lactose && !meal.isLactoseFree) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,10 +64,14 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: Categories(),
+      initialRoute: '/',
       routes: {
-        CategoryMealScreen.routeName: (context) => CategoryMealScreen(),
+        '/': (context) => ScreenNavigation(),
+        CategoryMealScreen.routeName: (context) =>
+            CategoryMealScreen(_availableMeals),
         MealScreen.routeName: (context) => MealScreen(),
+        Favorites.routeName: (context) => Favorites(),
+        Settings.routeName: (context) => Settings(_setSettings,settingsdata),
       },
     );
   }

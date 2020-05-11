@@ -7,9 +7,9 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Cookbook"),
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Cookbook"),
+      // ), managed in screen_selector.dart
       body: GridView(
         padding: const EdgeInsets.all(15),
         children: DataCategory.map(
