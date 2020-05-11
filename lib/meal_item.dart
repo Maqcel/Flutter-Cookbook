@@ -60,6 +60,7 @@ class MealItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return InkWell(
       onTap: () => selectMeal(context),
       child: Card(
@@ -79,16 +80,31 @@ class MealItem extends StatelessWidget {
                   ),
                   child: Image.network(
                     imageUrl,
-                    height: 250,
+                    height: screenSize.height * 0.3,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace stackTrace) {
+                      return SizedBox(
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.signal_wifi_off),
+                              Text('There is no internet'),
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center
+                          ),
+                        ),
+                        height: screenSize.height * 0.3,
+                      );
+                    }, //errorBuilder
                   ),
                 ),
                 Positioned(
                   bottom: 20,
                   right: 0,
                   child: Container(
-                    width: 320,
+                    width: screenSize.width*0.8,
                     color: Colors.black54,
                     padding: EdgeInsets.symmetric(
                       vertical: 5,
@@ -97,7 +113,7 @@ class MealItem extends StatelessWidget {
                     child: Text(
                       name,
                       style: TextStyle(
-                        fontSize: 26,
+                        fontSize: screenSize.width*0.059,
                         color: Colors.white,
                       ),
                       softWrap: true,

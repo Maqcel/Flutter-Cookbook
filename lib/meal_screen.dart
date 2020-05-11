@@ -7,7 +7,7 @@ class MealScreen extends StatelessWidget {
   Widget buildText(BuildContext context, String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
-      child: Text(text, style: Theme.of(context).textTheme.title),
+      child: Text(text, style: Theme.of(context).textTheme.headline6),
     );
   }
 
@@ -41,6 +41,20 @@ class MealScreen extends StatelessWidget {
                 child: Image.network(
                   selectedMeal.imageUrl,
                   fit: BoxFit.cover,
+                  errorBuilder: (BuildContext context, Object exception,
+                        StackTrace stackTrace) {
+                      return SizedBox(
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.signal_wifi_off),
+                              Text('There is no internet'),
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center
+                          ),
+                        ),
+                      );
+                    },
                 ),
                 width: double.infinity,
                 height: screenSize.height * 0.4,
