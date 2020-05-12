@@ -22,6 +22,28 @@ class _MyAppState extends State<MyApp> {
 
   List<Meal> _availableMeals = DataMeal;
 
+  List<Meal> _favouriteMeals = [];
+
+  void _toggleFavorite(String mealId) {
+    final where = _favouriteMeals.indexWhere((element) => element.id == mealId);
+    if (where >= 0) {
+      setState(
+        () {
+          _favouriteMeals.removeAt(where);
+        },
+      );
+    } else {
+      setState(() {
+        _favouriteMeals
+            .add(DataMeal.firstWhere((element) => element.id == mealId));
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id){
+    return _favouriteMeals.any((element) => element.id == id);
+  }
+
   void _setSettings(SettingsData _settings) {
     setState(() {
       settingsdata = _settings;
@@ -66,12 +88,12 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => ScreenNavigation(),
+        '/': (context) => ScreenNavigation(_favouriteMeals),
         CategoryMealScreen.routeName: (context) =>
             CategoryMealScreen(_availableMeals),
-        MealScreen.routeName: (context) => MealScreen(),
-        Favorites.routeName: (context) => Favorites(),
-        Settings.routeName: (context) => Settings(_setSettings,settingsdata),
+        MealScreen.routeName: (context) => MealScreen(_toggleFavorite,_isMealFavorite),
+        Favorites.routeName: (context) => Favorites(_favouriteMeals),
+        Settings.routeName: (context) => Settings(_setSettings, settingsdata),
       },
     );
   }

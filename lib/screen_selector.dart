@@ -2,23 +2,31 @@ import 'package:cookbook_app/categories.dart';
 import 'package:cookbook_app/favorites_screen.dart';
 import 'package:cookbook_app/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'models/meal_data.dart';
 
 class ScreenNavigation extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+  ScreenNavigation(this.favoriteMeals);
   @override
   _ScreenNavigationState createState() => _ScreenNavigationState();
 }
 
 class _ScreenNavigationState extends State<ScreenNavigation> {
-  final List<Map<String, Object>> _screens = [
-    {
-      'screen': Categories(),
-      'title': 'Cookbook',
-    },
-    {
-      'screen': Favorites(),
-      'title': 'Favorites',
-    },
-  ];
+  List<Map<String, Object>> _screens;
+  @override
+  void initState() {
+     _screens = [
+      {
+        'screen': Categories(),
+        'title': 'Cookbook',
+      },
+      {
+        'screen': Favorites(widget.favoriteMeals),
+        'title': 'Favorites',
+      },
+    ];
+    super.initState();
+  }
 
   int _currentScreen = 0;
 

@@ -4,6 +4,11 @@ import 'models/meal_data.dart';
 class MealScreen extends StatelessWidget {
   static const String routeName = '/meal-screen';
 
+  final Function _toggleFavorite;
+  final Function _isFavorite;
+
+  MealScreen(this._toggleFavorite, this._isFavorite);
+
   Widget buildText(BuildContext context, String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
@@ -33,6 +38,14 @@ class MealScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedMeal.name),
+          actions: <Widget>[
+            IconButton(
+              icon: _isFavorite(routeArgs)
+                  ? Icon(Icons.star)
+                  : Icon(Icons.star_border),
+              onPressed: () => _toggleFavorite(routeArgs),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -42,19 +55,16 @@ class MealScreen extends StatelessWidget {
                   selectedMeal.imageUrl,
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
-                        StackTrace stackTrace) {
-                      return SizedBox(
-                        child: Center(
-                          child: Column(
-                            children: <Widget>[
-                              Icon(Icons.signal_wifi_off),
-                              Text('There is no internet'),
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.center
-                          ),
-                        ),
-                      );
-                    },
+                      StackTrace stackTrace) {
+                    return SizedBox(
+                      child: Center(
+                        child: Column(children: <Widget>[
+                          Icon(Icons.signal_wifi_off),
+                          Text('There is no internet'),
+                        ], mainAxisAlignment: MainAxisAlignment.center),
+                      ),
+                    );
+                  },
                 ),
                 width: double.infinity,
                 height: screenSize.height * 0.4,
